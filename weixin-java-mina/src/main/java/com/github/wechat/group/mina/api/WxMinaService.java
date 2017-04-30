@@ -13,7 +13,7 @@ public interface WxMinaService {
 
   /**
    * code 换取 session_key 的接口。
-   * ​ 这是一个 HTTPS 接口，开发者服务器使用登录凭证 code 获取 session_key 和 openid。
+   * 这是一个 HTTPS 接口，开发者服务器使用登录凭证 code 获取 session_key 和 openid。
    * 其中 session_key 是对用户数据进行加密签名的密钥。为了自身应用安全，session_key 不应该在网络上传输。
    *
    * @param code OAuth2认证后获得的code
@@ -22,4 +22,15 @@ public interface WxMinaService {
    */
   WxMinaJsCode2Session getJsCode2SessionKey(String code) throws WxErrorException;
 
+  /**
+   * 设置配置的信息
+   *
+   * @param wxMinaConfigStorage 微信小程序配置
+   */
+  void setWxMinaConfigStorage(WxMinaConfigStorage wxMinaConfigStorage);
+
+  /**
+   * 初始化http请求对象
+   */
+  void initHttp();
 }

@@ -12,4 +12,11 @@ public interface WxMinaConfigStorage {
 
   String getSecret();
 
+  String getHttpProxyHost();
+
+  int getHttpProxyPort();
+
+  String getHttpProxyUsername();
+
+  String getHttpProxyPassword();
 }

@@ -4,6 +4,7 @@ import com.github.wechat.group.mina.api.WxMinaConfigStorage;
 import com.github.wechat.group.mina.api.WxMinaService;
 import com.github.wechat.group.mina.bean.WxMinaJsCode2Session;
 import jodd.http.HttpConnectionProvider;
+import jodd.http.JoddHttp;
 import jodd.http.ProxyInfo;
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.common.util.http.RequestExecutor;
@@ -40,7 +41,7 @@ public class WxMinaServiceImpl implements WxMinaService, RequestHttp {
     url.append("https://api.weixin.qq.com/sns/jscode2session?");
     url.append("appid=").append(this.getWxMinaConfigStorage().getAppId());
     url.append("&secret=").append(this.getWxMinaConfigStorage().getSecret());
-    url.append("&code=").append(code);
+    url.append("&js_code=").append(code);
     url.append("&grant_type=authorization_code");
 
     try {
@@ -53,18 +54,10 @@ public class WxMinaServiceImpl implements WxMinaService, RequestHttp {
 
   }
 
-  public WxMinaConfigStorage getWxMinaConfigStorage() {
-    return wxMinaConfigStorage;
-  }
-
-  public void setWxMinaConfigStorage(WxMinaConfigStorage wxMinaConfigStorage) {
-    this.wxMinaConfigStorage = wxMinaConfigStorage;
-  }
-
   /**
    * 返回httpClient
    *
-   * @return
+   * @return Jodd的httpClient
    */
   @Override
   public Object getRequestHttpClient() {
@@ -74,10 +67,36 @@ public class WxMinaServiceImpl implements WxMinaService, RequestHttp {
   /**
    * 返回httpProxy
    *
-   * @return
+   * @return Jodd的httpProxy
    */
   @Override
   public Object getRequestHttpProxy() {
     return this.httpProxy;
   }
+
+  @Override
+  public void initHttp() {
+
+    WxMinaConfigStorage configStorage = this.getWxMinaConfigStorage();
+
+    // 实际上，jodd的代理设置不能对HTTPS的链接生效，而微信API全部为HTTPS，故下面设置都不能产生效果，只是兼容其他httpClient库而保留。
+    if (configStorage.getHttpProxyHost() != null && configStorage.getHttpProxyPort() > 0) {
+      httpProxy = new ProxyInfo(ProxyInfo.ProxyType.HTTP, configStorage.getHttpProxyHost(), configStorage
+        .getHttpProxyPort(), configStorage.getHttpProxyUsername(), configStorage.getHttpProxyPassword());
+    }
+
+    httpClient = JoddHttp.httpConnectionProvider;
+    httpClient.useProxy(httpProxy);
+  }
+
+  private WxMinaConfigStorage getWxMinaConfigStorage() {
+    return wxMinaConfigStorage;
+  }
+
+  @Override
+  public void setWxMinaConfigStorage(WxMinaConfigStorage wxMinaConfigStorage) {
+    this.wxMinaConfigStorage = wxMinaConfigStorage;
+    this.initHttp();
+  }
+
 }
