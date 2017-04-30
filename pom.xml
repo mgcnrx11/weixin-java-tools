@@ -85,6 +85,7 @@
   <modules>
     <module>weixin-java-common</module>
     <module>weixin-java-cp</module>
+    <module>weixin-java-mina</module>
     <module>weixin-java-mp</module>
     <module>weixin-java-pay</module>
     <!--module>weixin-java-osgi</module-->
