@@ -1,4 +1,4 @@
-package me.chanjar.weixin.mp.bean.mambercard;
+package me.chanjar.weixin.mp.bean.membercard;
 
 import com.google.gson.annotations.SerializedName;
 

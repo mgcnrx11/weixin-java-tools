@@ -6,7 +6,7 @@ import me.chanjar.weixin.mp.bean.*;
 import me.chanjar.weixin.mp.bean.datacube.WxDataCubeUserCumulate;
 import me.chanjar.weixin.mp.bean.datacube.WxDataCubeUserSummary;
 import me.chanjar.weixin.mp.bean.kefu.WxMpKefuMessage;
-import me.chanjar.weixin.mp.bean.mambercard.WxMpMemberCardUserInfoResult;
+import me.chanjar.weixin.mp.bean.membercard.WxMpMemberCardUserInfoResult;
 import me.chanjar.weixin.mp.bean.material.*;
 import me.chanjar.weixin.mp.bean.result.*;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateIndustry;

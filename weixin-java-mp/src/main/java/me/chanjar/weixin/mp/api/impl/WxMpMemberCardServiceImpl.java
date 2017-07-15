@@ -8,8 +8,8 @@ import com.google.gson.reflect.TypeToken;
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpMemberCardService;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.mambercard.WxMpMemberCardActivatedMessage;
-import me.chanjar.weixin.mp.bean.mambercard.WxMpMemberCardUserInfoResult;
+import me.chanjar.weixin.mp.bean.membercard.WxMpMemberCardActivatedMessage;
+import me.chanjar.weixin.mp.bean.membercard.WxMpMemberCardUserInfoResult;
 import me.chanjar.weixin.mp.util.json.WxMpGsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 会员卡相关接口的实现类
  *
- * @author YuJian
+ * @author YuJian(mgcnrx11@gmail.com)
  * @version 2017/7/8
  */
 public class WxMpMemberCardServiceImpl implements WxMpMemberCardService {
